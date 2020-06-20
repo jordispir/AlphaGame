@@ -1,4 +1,11 @@
 import pygame
+
+global x, y
+x, y = 500, 400
+
+global listLetras
+listaLetras = []
+
 pygame.init()
 
 screen = pygame.display.set_mode((1200, 800))
@@ -6,53 +13,32 @@ clock = pygame.time.Clock()
 clock.tick(60)
 
 
-"""  global eventos #Hacer un global implica que la variable eventos exista solo 1 vez por lo que se reduce la cantidad de lag en el programa. (utlizada en la clase juego)
-    eventos = pygame.event.get()
-
+def fin():
     out = False
-    for event in eventos:
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 out = True
         if event.type == pygame.QUIT:
             out = True
 
-        return out """
-
-def fin():
-    event = pygame.event.poll()
-    print ("event")
-    if event.type == pygame.KEYDOWN:
-        print ("event2")
-        if event.key == pygame.K_ESCAPE:
-            print ("event3")
-            out = True 
-
         return out
 
 def game_intro():
-    xLetra, yLetra = 500, 400
+    dibuja()
     while not fin():
-        dibuja()
         flip()
-        inpt(xLetra) #Here we are calling our function
-
-#def returnCoordenadas():
-    #return xLetra, yLetra
+        inpt() #Here we are calling our function
+        login()
 
 def dibujaAlPulsar(word,x,y):
     print ("dibujoPulsando")
     font = pygame.font.SysFont(None, 25)
     letra = font.render("{}".format(word), True, (255, 0, 0))
-    screen.blit(letra, (x, y))
 
-    """ print ("for")
-        listaLetra = []
-    for i in listaLetra:
-        print ("B")
-        listaLetra.append(letra)
-        print ("A")
-        screen.blit(letra,(x + 20,y))"""
+    if x > 500: #limitar el dibujo de la coordenada x hasta que esta sea mayor de 500.
+        screen.blit(letra, (x, y))
 
 def dibuja():
     font = pygame.font.SysFont(None, 25)
@@ -61,11 +47,35 @@ def dibuja():
 
     screen.blit(text, (x2,y2))
 
+def logLetra(letraTecla):
+    global listaLetras
+    if x >= 500: #limitar el append de la lista hasta que la coordenada x sea mayor de 500.
+        listaLetras.append(letraTecla)
+
+def login():
+    global nombre
+    if x > 500:
+        nombre = "".join(listaLetras) #.join sirve para concatenar la lista.
+        print (nombre)
+    
+
+def eliminarLetra(word, x, y):
+    global nombre
+    colorNegro = (0,0,0)
+
+    if x >= 500:
+        pygame.draw.rect(screen, (colorNegro), (x, y, 20, 20))
+        pygame.display.update() #actualiza únicamente esta parte del frame.
+
+    if x >= 500:
+        listaLetras.pop() #elimina el último caracter de la lista.
+
+
 def flip():
     pygame.display.flip()
 
-def inpt(x):
-
+def inpt():
+    global x, y
     print ("antes" + str(x)) 
     done = True
     word=""
@@ -73,103 +83,136 @@ def inpt(x):
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    quit()
+                elif event.key == pygame.K_a:
                     word+=str(chr(event.key))
+                    logLetra("a")
                     done = False
-                if event.key == pygame.K_b:
+                elif event.key == pygame.K_b:
                     word+=chr(event.key)
+                    logLetra("b")
                     done = False
-                if event.key == pygame.K_c:
+                elif event.key == pygame.K_c:
                     word+=chr(event.key)
+                    logLetra("c")
                     done = False
-                if event.key == pygame.K_d:
+                elif event.key == pygame.K_d:
                     word+=chr(event.key)
+                    logLetra("d")
                     done = False
-                if event.key == pygame.K_e:
+                elif event.key == pygame.K_e:
                     word+=chr(event.key)
+                    logLetra("e")
                     done = False
-                if event.key == pygame.K_f:
+                elif event.key == pygame.K_f:
                     word+=chr(event.key)
+                    logLetra("f")
                     done = False
-                if event.key == pygame.K_g:
+                elif event.key == pygame.K_g:
                     word+=chr(event.key)
+                    logLetra("g")
                     done = False
-                if event.key == pygame.K_h:
+                elif event.key == pygame.K_h:
                     word+=chr(event.key)
+                    logLetra("h")
                     done = False
-                if event.key == pygame.K_i:
+                elif event.key == pygame.K_i:
                     word+=chr(event.key)
+                    logLetra("i")
                     done = False
-                if event.key == pygame.K_j:
+                elif event.key == pygame.K_j:
                     word+=chr(event.key)
+                    logLetra("j")
                     done = False
-                if event.key == pygame.K_k:
+                elif event.key == pygame.K_k:
                     word+=chr(event.key)
+                    logLetra("k")
                     done = False
-                if event.key == pygame.K_l:
+                elif event.key == pygame.K_l:
                     word+=chr(event.key)
+                    logLetra("l")
                     done = False
-                if event.key == pygame.K_m:
+                elif event.key == pygame.K_m:
                     word+=chr(event.key)
+                    logLetra("m")
                     done = False
-                if event.key == pygame.K_n:
+                elif event.key == pygame.K_n:
                     word+=chr(event.key)
+                    logLetra("n")
                     done = False
-                if event.key == pygame.K_o:
+                elif event.key == pygame.K_o:
                     word+=chr(event.key)
+                    logLetra("o")
                     done = False
-                if event.key == pygame.K_p:
+                elif event.key == pygame.K_p:
                     word+=chr(event.key)
+                    logLetra("p")
                     done = False
-                if event.key == pygame.K_q:
+                elif event.key == pygame.K_q:
                     word+=chr(event.key)
+                    logLetra("q")
                     done = False
-                if event.key == pygame.K_r:
+                elif event.key == pygame.K_r:
                     word+=chr(event.key)
+                    logLetra("r")
                     done = False
-                if event.key == pygame.K_s:
+                elif event.key == pygame.K_s:
                     word+=chr(event.key)
+                    logLetra("s")
                     done = False
-                if event.key == pygame.K_t:
+                elif event.key == pygame.K_t:
                     word+=chr(event.key)
+                    logLetra("t")
                     done = False
-                if event.key == pygame.K_v:
+                elif event.key == pygame.K_u:
                     word+=chr(event.key)
+                    logLetra("u")
                     done = False
-                if event.key == pygame.K_w:
+                elif event.key == pygame.K_v:
                     word+=chr(event.key)
+                    logLetra("v")
                     done = False
-                if event.key == pygame.K_x:
+                elif event.key == pygame.K_w:
                     word+=chr(event.key)
+                    logLetra("w")
                     done = False
-                if event.key == pygame.K_y:
+                elif event.key == pygame.K_x:
                     word+=chr(event.key)
+                    logLetra("x")
                     done = False
-                if event.key == pygame.K_z:
+                elif event.key == pygame.K_y:
                     word+=chr(event.key)
+                    logLetra("y")
                     done = False
-                if event.key == pygame.K_SPACE:
+                elif event.key == pygame.K_z:
                     word+=chr(event.key)
+                    logLetra("z")
                     done = False
-                if event.key == pygame.K_BACKSPACE:
+                elif event.key == pygame.K_SPACE:
                     word+=chr(event.key)
+                    logLetra(" ")
                     done = False
+                elif x > 500: #si la x es mayor de 500 puede borrar.
+                    if event.key == pygame.K_BACKSPACE:
+                        eliminarLetra(word, x, y)
+                    x -= 10
 
                 #events...
 
-    if done == False: 
-        x += 20
-        print ("despues" + str(x)) 
-    if x == x + 20:
-        print ("if x == x + 20 = " +str(x))
-        return dibujaAlPulsar(word, x, yLetra) #el return implica que no se ejecute el while
+    x += 10
+    print ("despues" + str(x)) 
+    return dibujaAlPulsar(word, x, y) #el return implica que no se ejecute el while
 
     """dibuja devuelve el valor tan solo cuando la tecla es pulsada, por lo tanto
        el método dibuja hará el blit cuando la tecla se pulse."""
 
 game_intro()
 
-#TODO FIN NO SE EJECUTA.
-#TODO variable font dos veces definida
-#TODO variable xLetra augmenta y vuelve a su valor inicial
-#TODO parametro x en el while de game_intro se repite por lo que nunca dejará de ser 500
+#TODO FIN NO SE EJECUTA. ---> OK
+#TODO variable font dos veces definida ---> Está bien así.
+#TODO variable xLetra augmenta y vuelve a su valor inicial. ---> OK
+#TODO parametro x en el while de game_intro se repite por lo que nunca dejará de ser 500 --> OK 
+
+#TODO printar nombre al eliminar letra. 

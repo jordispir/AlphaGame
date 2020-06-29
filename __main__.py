@@ -4,12 +4,11 @@ import framework
 pygame.init()
 
 Ventana = framework.ventana()
-Juego = framework.juego()
+Login = framework.login()
 
 while not Ventana.finalizar():
    Ventana.empezarFrame() 
-   Juego.login()
-   Juego.dibuja()
+   Login.loginPantalla()
    Ventana.acabarFrame()
 
 pygame.quit()

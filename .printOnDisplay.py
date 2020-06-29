@@ -30,7 +30,6 @@ def game_intro():
     while not fin():
         flip()
         inpt() #Here we are calling our function
-        login()
 
 def dibujaAlPulsar(word,x,y):
     print ("dibujoPulsando")
@@ -49,15 +48,13 @@ def dibuja():
 
 def logLetra(letraTecla):
     global listaLetras
+    global nombre
+
     if x >= 500: #limitar el append de la lista hasta que la coordenada x sea mayor de 500.
         listaLetras.append(letraTecla)
-
-def login():
-    global nombre
     if x > 500:
         nombre = "".join(listaLetras) #.join sirve para concatenar la lista.
         print (nombre)
-    
 
 def eliminarLetra(word, x, y):
     global nombre
